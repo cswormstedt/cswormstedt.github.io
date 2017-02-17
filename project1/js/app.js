@@ -10,56 +10,46 @@ var mouse = [];
 window.onload = function(event){
 
 ball.initBall();
-// ball.initMove();
 animateCanvas();
 
 }
 
 //ball radius to help with wall collision
 var ballRadius = 10;
-var dx = 2;
-var dy = -2;
 
 
-ball
+//ball
 var ball ={
+	//position
+	p: [],
+	//direction
+	d: [],
 
-	position: [],
-
-	direction: [],
-
-	// starting position
+	//position varibles
 	startPoint: function(x, y){
 		return{
 			x: x,
 			y: y
 		}
 	},
-
-	// puts the staring position
+	//direction varibales
+	movement: function(dx, dy){
+		return{
+			dx: dx,
+			dy: dy
+		}
+	},
+	// sets position and direction varibles
 	initBall: function(){
-        this.position.push(this.startPoint(canvas.width/2, canvas.height -30));
+        this.p.push(this.startPoint(canvas.width/2, canvas.height -30));
+    	this.d.push(this.movement(2, -2));
     },
 
-	//how to put in direction to call in draw function??
-	// movement: function(dx, dy){
-	// 	return{
-	// 		dx: this.position[0].x += dx,
-	// 		dy: this.position[0].y += dy
-	// 	}
-	// },
-
-	// //start movement
-	// initMove: function (){
-	// 	this.direction.push(this.movement(2, -2));
-
-	// },
-
-	// draw
+	// ball is made
 	drawBall: function(){	
 		ctx.beginPath(); 	      
-		ctx.arc((this.position[0].x), (this.position[0].y), ballRadius, 0, 2 * Math.PI);
-		ctx.fillStyle = "rgba(0, 0, 230, 0.7)";
+		ctx.arc((this.p[0].x), (this.p[0].y), ballRadius, 0, 2 * Math.PI);
+		ctx.fillStyle = "rgba(200, 0, 0, 0.7)";
 		ctx.fill();
 	},
 };
@@ -67,16 +57,16 @@ var ball ={
 function draw() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     ball.drawBall();
-    
-	if(ball.position[0].x + dx > canvas.width-ballRadius || ball.position[0].x + dx < ballRadius) {
-        dx = -dx;
+    //collison logic
+	if(ball.p[0].x + ball.d[0].dx > canvas.width-ballRadius || ball.p[0].x + ball.d[0].dx < ballRadius) {
+        ball.d[0].dx = -ball.d[0].dx;
     }
-    if(ball.position[0].y + dy > canvas.height-ballRadius || ball.position[0].y + dy < ballRadius) {
-        dy = -dy;
+    if(ball.p[0].y + ball.d[0].dy > canvas.height-ballRadius || ball.p[0].y + ball.d[0].dy < ballRadius) {
+        ball.d[0].dy = -ball.d[0].dy;
     }
-
-	ball.position[0].x += dx;
-    ball.position[0].y += dy;
+    //ball movement
+	ball.p[0].x += ball.d[0].dx;
+    ball.p[0].y += ball.d[0].dy;
 	
 };	
 
