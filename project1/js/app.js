@@ -17,20 +17,35 @@ var ballRadius = 10;
 //ball
 var ball ={
 
-	body: [],
+	position: [],
+
 	direction: '',
-	position: '',
 
+	// starting position
+	startPoint: function(x, y){
+		return{
+			x: x,
+			y: y
+		}
+		console.log(hey);
+	},
+	
 
-
-
+	initBall: function(){
+        this.position.push(this.startPoint(canvas.width/2, canvas.height -30));
+    
+    },
+    
 	// draw
 	drawBall: function(){	
 		ctx.beginPath(); 	      
-		ctx.arc(30, 30 , ballRadius, 0, 2 * Math.PI);
-		ctx.fillStyle = "rgba 0, 0, 0, 1";
+		ctx.arc((this.position[0].x), (this.position[0].y), ballRadius, 0, 2 * Math.PI);
+		ctx.fillStyle = "rgba(0, 0, 230, 0.7)";
 		ctx.fill();
 	},
 
 };
+
+// window.requestAnimationFrame(ball.drawBall);
+
 
