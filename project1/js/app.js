@@ -5,6 +5,16 @@ var ctx = canvas.getContext('2d');
 //grabbed canvas and created context
 
 var keys = [];
+
+// Spacebar 32
+// Left Arrow 37
+// right arrow 39
+
+
+canvas.onmouseover = myOver;
+canvas.onmousemove = myMove;
+var dragok = false;
+
 var mouse = [];
 //ball radius to help with wall collision
 var ballRadius = 10;
@@ -74,6 +84,7 @@ var ball = {
 	    	this.ballY + this.ballDy < ballRadius){
 	        this.ballDy = -this.ballDy;
 	    }
+	    // dont think paddle dectection is working
 	    if(this.ballY + this.ballDy < ballRadius){
 	    	this.ballDy = -this.ballDy;
 	    }
@@ -115,6 +126,15 @@ var paddle ={
 		ctx.stroke();
 	},
 
+	control: function(){
+			if(keys[37]){
+				this.paddleP[0].x -= 5;
+			}
+			if(keys[39]){
+				this.paddleP[0].x += 5;
+			}
+	}
+
 };
 
 
@@ -126,6 +146,15 @@ window.onload = function(event){
 ball.initBall();
 paddle.initPaddle();
 animateCanvas();
+
+document.addEventListener('keydown', function(event){
+	keys[event.keyCode] = true;
+});
+
+document.addEventListener('keyup', function(event){
+	keys[event.keyCode] = false;
+});
+
 };
 
 function draw() {
@@ -135,6 +164,7 @@ function draw() {
     paddle.drawPaddle();
     ball.ballCollision();
     ball.move();
+    paddle.control();
     	
 };	
 
