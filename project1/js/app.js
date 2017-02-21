@@ -45,6 +45,8 @@ var ball = {
 	},
 	
 	// sets position and direction varibles
+
+
 	initBall: function(){
         this.ballP.push(this.startPoint(canvas.width/2, canvas.height -35));
     	this.ballD.push(this.direction(2, -2));
@@ -92,11 +94,42 @@ var ball = {
 
 
 // bricks 
+
+
+
+
 var brick = {
 
-	
+	row: '',
+	column: '',
+	width: '',
+	height:'',
+	padding: '',
+	top: '',
+	left: '',
 
-	
+initLevelOne: function(){
+	this.row = 4;
+	this.column = 5;
+	this.width = 75;
+	this.height = 10;
+	this.padding = 10;
+	this.top = 25;
+	this.left = 25;
+
+	},
+
+drawBrick: function(){
+	ctx.beginPath();
+	ctx.rect(25, 25, this.width, this.height);
+	ctx.strokeStyle = "rgba(250, 0, 0, 0.9)";
+	ctx.lineWidth = 1;
+	ctx.fillStyle = "rgba(200, 0, 0, 0.7)";
+	ctx.fill();
+	ctx.stroke();
+
+	},
+
 };
 
 //paddle
@@ -148,10 +181,12 @@ var paddle ={
 };
 
 
+
 //start
 window.onload = function(event){
 ball.initBall();
 paddle.initPaddle();
+brick.initLevelOne();
 animateCanvas();
 
 
@@ -170,6 +205,7 @@ function draw() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     ball.drawBall();
     paddle.drawPaddle();
+    brick.drawBrick();
     ball.xCollision();
     ball.yCollision();
     ball.move();
