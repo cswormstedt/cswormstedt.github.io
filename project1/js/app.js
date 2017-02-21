@@ -4,17 +4,6 @@ var canvas = document.getElementById('canvas');
 var ctx = canvas.getContext('2d');
 //grabbed canvas and created context
 
-var keys = [];
-
-// Spacebar 32
-// Left Arrow 37
-// right arrow 39
-
-
-canvas.onmouseover = myOver;
-canvas.onmousemove = myMove;
-var dragok = false;
-
 var mouse = [];
 //ball radius to help with wall collision
 var ballRadius = 10;
@@ -75,35 +64,53 @@ var ball = {
 	},
 
 	// collision logic
-	ballCollision: function(){
-		if(this.ballX + this.ballDx > canvas.width-ballRadius || 
+	xCollision: function(){
+		//this hits the walls
+		if(this.ballX + this.ballDx > canvas.width - ballRadius || 
 			this.ballX + this.ballDx < ballRadius) {
 	        this.ballDx = -this.ballDx;
-	    }
-	    if(this.ballY + this.ballDy > canvas.height-ballRadius || 
-	    	this.ballY + this.ballDy < ballRadius){
-	        this.ballDy = -this.ballDy;
-	    }
-	    // dont think paddle dectection is working
-	    if(this.ballY + this.ballDy < ballRadius){
-	    	this.ballDy = -this.ballDy;
-	    }
-	    if(this.ballX > paddle.paddleP[0].x-ballRadius &&
-	    	this.ballx > paddle.paddleP[0].x + paddleWidth){
-	    	this.ballDx = -this.ballDx;
-	    }
+	   	 }
 	},
 
+	yCollision: function(){
+	    // this hits only the ceiling and paddle
+	    if(this.ballY + this.ballDy < ballRadius){
+	        this.ballDy = -this.ballDy;
+	  	} 
+	  	// 
+	  	if(this.ballY + this.ballDy > paddle.paddleY - ballRadius) {
+    	if(this.ballX > paddle.paddleX && this.ballX < paddle.paddleX + paddleWidth) {
+        	this.ballDy = -this.ballDy;
+   		 }
+   		 else {
+        	alert("GAME OVER");
+       		 window.location.reload();
+    		}
+		}
+	 },	
 };
 
 
 // bricks 
-var brick = {};
+var brick = {
+
+	
+
+	
+};
 
 //paddle
 var paddle ={
 
 	paddleP: [],
+	keys: [],
+
+	paddleX: '',
+	paddleY: '',
+
+// Spacebar 32
+// Left Arrow 37
+// right arrow 39
 
 	startPoint: function(x, y){
 		return{
@@ -114,11 +121,14 @@ var paddle ={
 
 	initPaddle: function(){
         this.paddleP.push(this.startPoint(225, canvas.height -25));
+        this.paddleX = this.paddleP[0].x;
+        this.paddleY = this.paddleP[0].y;
+
     },
 
 	drawPaddle: function(){
 		ctx.beginPath();
-		ctx.rect(this.paddleP[0].x, this.paddleP[0].y, paddleWidth, 5);
+		ctx.rect(this.paddleX, this.paddleY, paddleWidth, 5);
 		ctx.strokeStyle = "rgba(250, 0, 0, 0.9)";
 		ctx.lineWidth = 1;
 		ctx.fillStyle = "rgba(200, 0, 0, 0.7)";
@@ -127,18 +137,15 @@ var paddle ={
 	},
 
 	control: function(){
-			if(keys[37]){
-				this.paddleP[0].x -= 5;
+			if(this.keys[37] && this.paddleX > 0){
+				this.paddleX -= 5;
 			}
-			if(keys[39]){
-				this.paddleP[0].x += 5;
+			if(this.keys[39] && this.paddleX < canvas.width-paddleWidth){
+				this.paddleX += 5;
 			}
-	}
+	},
 
 };
-
-
-
 
 
 //start
@@ -147,12 +154,13 @@ ball.initBall();
 paddle.initPaddle();
 animateCanvas();
 
+
 document.addEventListener('keydown', function(event){
-	keys[event.keyCode] = true;
+	paddle.keys[event.keyCode] = true;
 });
 
 document.addEventListener('keyup', function(event){
-	keys[event.keyCode] = false;
+	paddle.keys[event.keyCode] = false;
 });
 
 };
@@ -162,7 +170,8 @@ function draw() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     ball.drawBall();
     paddle.drawPaddle();
-    ball.ballCollision();
+    ball.xCollision();
+    ball.yCollision();
     ball.move();
     paddle.control();
     	
