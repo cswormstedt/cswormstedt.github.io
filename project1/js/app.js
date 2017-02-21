@@ -228,10 +228,20 @@ var paddle ={
 //start
 window.onload = function(event){
 ball.initBall();
-brick.initBrick();
 brick.initLevelOne();
 paddle.initPaddle();
-// animateCanvas();
+
+//start button
+$(window).keypress(function(e) {
+    if (e.keyCode === 32) {
+		brick.initBrick();
+		animateCanvas();
+	}
+});
+
+$(window).keypress(function(e) {
+	space[e.keyCode] = true;
+}
 
 document.addEventListener('keydown', function(event){
 	paddle.keys[event.keyCode] = true;
