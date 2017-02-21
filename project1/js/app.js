@@ -22,7 +22,6 @@ var ball = {
 	ballDx: '',
 	ballDy: '',
 
-
 	//position varibles
 	startPoint: function(x, y){
 		return{
@@ -45,8 +44,6 @@ var ball = {
 	},
 	
 	// sets position and direction varibles
-
-
 	initBall: function(){
         this.ballP.push(this.startPoint(canvas.width/2, canvas.height -35));
     	this.ballD.push(this.direction(2, -2));
@@ -54,7 +51,6 @@ var ball = {
     	this.ballY  = this.ballP[0].y;
     	this.ballDx = this.ballD[0].dx;
     	this.ballDy = this.ballD[0].dy;
-
     },
 
 	// ball is made
@@ -90,27 +86,35 @@ var ball = {
     		}
 		}
 	 },	
+
+	 // brickCollison: function(){
+	 // 	if(this.ballX + this.ballDx > brick.brickX - ballRadius)
+	 // 		this.ballDx = -this.ballDx;
+
+	 // },
 };
 
 
 // bricks 
-
-
-
-
 var brick = {
 
+	//brick placement
 	row: '',
 	column: '',
+	//brick size
 	width: '',
 	height:'',
 	padding: '',
+	//padding on canvas
 	top: '',
 	left: '',
+	// //x y position
+	brickX: '',
+	brickY: '',
 
 initLevelOne: function(){
-	this.row = 4;
-	this.column = 5;
+	this.row = 5;
+	this.column = 6;
 	this.width = 75;
 	this.height = 10;
 	this.padding = 10;
@@ -120,14 +124,20 @@ initLevelOne: function(){
 	},
 
 drawBrick: function(){
+	for(c = 0; c < this.column; c++) {
+        for(r = 0; r < this.row; r++) {
+        	this.brickX = (c*(this.width + this.padding)) + this.left;
+    		this.brickY = (r*(this.height + this.padding)) + this.top;
+         
 	ctx.beginPath();
-	ctx.rect(25, 25, this.width, this.height);
+	ctx.rect(this.brickX, this.brickY, this.width, this.height);
 	ctx.strokeStyle = "rgba(250, 0, 0, 0.9)";
 	ctx.lineWidth = 1;
 	ctx.fillStyle = "rgba(200, 0, 0, 0.7)";
 	ctx.fill();
 	ctx.stroke();
-
+ 			}
+    	}
 	},
 
 };
@@ -208,6 +218,7 @@ function draw() {
     brick.drawBrick();
     ball.xCollision();
     ball.yCollision();
+    ball.brickCollison();
     ball.move();
     paddle.control();
     	
