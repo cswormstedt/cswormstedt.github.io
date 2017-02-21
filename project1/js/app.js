@@ -87,13 +87,25 @@ var ball = {
 		}
 	 },	
 
-	 // brickCollison: function(){
-	 // 	if(this.ballX + this.ballDx > brick.brickX - ballRadius)
-	 // 		this.ballDx = -this.ballDx;
+	 brickCollison: function(){
 
-	 // },
+	 	for(c = 0; c < brick.column; c++) {
+        	for(r = 0; r < brick.row; r++) {
+        		brick.brickX = (c*(brick.width + brick.padding)) + brick.left;
+    			brick.brickY = (r*(brick.height + brick.padding)) + brick.top;
+				if(this.ballX > brick.brickX && this.ballX < brick.brickX + brick.width && 
+					this.ballY > brick.brickY && this.ballY < brick.brickY + brick.height) {
+                    this.ballDy = -this.ballDy;
+                    console.log(brick.brickX + ' this brick x')
+
+				}
+			}
+		}
+	},
+
+
+
 };
-
 
 // bricks 
 var brick = {
@@ -108,12 +120,14 @@ var brick = {
 	//padding on canvas
 	top: '',
 	left: '',
-	// //x y position
+	//x y position
 	brickX: '',
 	brickY: '',
+	//is the brick on the screen 1 yes 0 no
+	brickStatus: '',
 
 initLevelOne: function(){
-	this.row = 5;
+	this.row = 3;
 	this.column = 6;
 	this.width = 75;
 	this.height = 10;
@@ -128,17 +142,18 @@ drawBrick: function(){
         for(r = 0; r < this.row; r++) {
         	this.brickX = (c*(this.width + this.padding)) + this.left;
     		this.brickY = (r*(this.height + this.padding)) + this.top;
-         
-	ctx.beginPath();
-	ctx.rect(this.brickX, this.brickY, this.width, this.height);
-	ctx.strokeStyle = "rgba(250, 0, 0, 0.9)";
-	ctx.lineWidth = 1;
-	ctx.fillStyle = "rgba(200, 0, 0, 0.7)";
-	ctx.fill();
-	ctx.stroke();
- 			}
-    	}
-	},
+
+				ctx.beginPath();
+				ctx.rect(this.brickX, this.brickY, this.width, this.height);
+				ctx.strokeStyle = "rgba(250, 0, 0, 0.9)";
+				ctx.lineWidth = 1;
+				ctx.fillStyle = "rgba(200, 0, 0, 0.7)";
+				ctx.fill();
+				ctx.stroke();
+			}
+			
+ 		}
+    }
 
 };
 
