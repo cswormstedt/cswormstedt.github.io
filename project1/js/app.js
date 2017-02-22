@@ -90,8 +90,8 @@ var ball = {
 			board.drawBrick();
        		 
     		}
-			}
 		}
+	
 	 // brickCollison
 	 	for(c = 0; c < board.column; c++) {
         	for(r = 0; r < board.row; r++) {
@@ -125,7 +125,6 @@ var ball = {
 	},
 
 };
-
 
 // board 
 var board = {
@@ -273,7 +272,7 @@ board.initLevelOne();
 paddle.initPaddle();
 
 //start button
-$(window).keydown(function(e) {
+$(window).one('keypress', function(e) {
     if (e.keyCode === 32) {
 		board.initBoard();
 		animateCanvas();
