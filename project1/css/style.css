@@ -2,9 +2,16 @@ body  {
 	background-color: rgba(100, 100, 100, 0.7);
 }
 
+header {
+	/*background-color: rgba(0, 0, 220, 0.7);*/
+	height: 150px;
+}
+
 #canvas {
-	margin: 10px;
-	border: 2px solid black;
+	font-family: 'Black Ops One', cursive;
+	display: block;
+	margin-top: 10px;
+	margin: auto;
 	background-color: rgba(202, 202, 202, 0.9);
 }
 
