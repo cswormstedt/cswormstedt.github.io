@@ -48,7 +48,7 @@ var ball = {
 	drawBall: function(){	
 		ctx.beginPath(); 	      
 		ctx.arc(this.ballX, this.ballY, ballRadius, 0, 2 * Math.PI);
-		ctx.fillStyle = "rgba(200, 0, 0, 0.7)";
+		ctx.fillStyle = "#EE8108";
 		ctx.fill();
 	},
 	// collision logic
@@ -77,8 +77,20 @@ var ball = {
         	paddle.paddleY = paddle.paddleP[0].y;
         }if(lives.livesCount === 0){
     		alert("GAME OVER");
-       		 window.location.reload();
+    		player.playerInput = 2;
+    		lives.livesCount = 3;
+    		score.points = 0;
+    		this.ballX  = this.ballP[0].x;
+			this.ballY  = this.ballP[0].y;
+			this.ballDx = this.ballD[0].dx;
+			this.ballDy = this.ballD[0].dy;
+			paddle.paddleX = paddle.paddleP[0].x;
+			paddle.paddleY = paddle.paddleP[0].y;
+			board.initBoard();
+			board.drawBrick();
+       		 
     		}
+			}
 		}
 	 // brickCollison
 	 	for(c = 0; c < board.column; c++) {
@@ -103,7 +115,7 @@ var ball = {
 						board.initBoard();
 						board.drawBrick();
 					}
-					if (score.points === 36){
+					if (score.points === 54){
 						alert("PLAYER: " + this.playerInput + " WON!");
 						}
                 	}
@@ -113,6 +125,7 @@ var ball = {
 	},
 
 };
+
 
 // board 
 var board = {
@@ -144,17 +157,7 @@ initLevelOne: function(){
 	this.left = 25;
 	this.brickStatus = 1;
 },
-// level two design
-// initLevelTwo: function(){
-// 	this.row = 6;
-// 	this.column = 6;
-// 	this.width = 75;
-// 	this.height = 10;
-// 	this.padding = 10;
-// 	this.top = 25;
-// 	this.left = 25;
-// 	this.brickStatus = 1;
-// },	
+
 initBoard: function (){
 	for(c = 0; c < this.column; c++) {
 		this.board[c]=[];
@@ -174,9 +177,9 @@ drawBrick: function(){
 	    			this.board[c][r].y = this.brickY;
 					ctx.beginPath();
 					ctx.rect(this.brickX, this.brickY, this.width, this.height);
-					ctx.strokeStyle = "rgba(250, 0, 0, 0.9)";
+					ctx.strokeStyle = "#f0ad4e";
 					ctx.lineWidth = 1;
-					ctx.fillStyle = "rgba(200, 0, 0, 0.7)";
+					ctx.fillStyle = "#EE8108";
 					ctx.fill();
 					ctx.stroke();
 				}
@@ -188,9 +191,9 @@ drawBrick: function(){
 var score = {
 	points: 0,
 	score: function(){
-		ctx.font = "12px 'Black Ops One', cursive"
-		ctx.fillStyle = "rgba(200, 0, 0, 0.7)";
-		ctx.fillText("SCORE " + this.points, 482, 10);
+		ctx.font = "13px 'Black Ops One', cursive"
+		ctx.fillStyle = "#EE8108";
+		ctx.fillText("SCORE: " + this.points, 478, 10);
 
 	}
 };
@@ -199,19 +202,19 @@ var lives = {
 	livesCount: 3,
 	lives: function(){
 		ctx.font = "12px 'Black Ops One', cursive"
-		ctx.fillStyle = "rgba(200, 0, 0, 0.7)";
-		ctx.fillText("LIVES " + this.livesCount, 10, 10);
+		ctx.fillStyle = "#EE8108";
+		ctx.fillText("LIVES: " + this.livesCount, 10, 10);
 	}
 };
 
 //player status
 var player = {
-	playerInput:'',
+	playerInput: 1,
 
 
 	player: function(){
 		ctx.font = "18px 'Black Ops One', cursive"
-		ctx.fillStyle = "rgba(200, 0, 0, 0.7)";
+		ctx.fillStyle = "#EE8108";
 		ctx.fillText("PLAYER: " + this.playerInput, canvas.width/2 - 44, canvas.height -330);
 	}
 };
@@ -245,9 +248,9 @@ var paddle ={
 	drawPaddle: function(){
 		ctx.beginPath();
 		ctx.rect(this.paddleX, this.paddleY, paddleWidth, 5);
-		ctx.strokeStyle = "rgba(250, 0, 0, 0.9)";
+		ctx.strokeStyle = "#f0ad4e";
 		ctx.lineWidth = 1;
-		ctx.fillStyle = "rgba(200, 0, 0, 0.7)";
+		ctx.fillStyle = "#EE8108";
 		ctx.fill();
 		ctx.stroke();
 	},
@@ -270,7 +273,7 @@ board.initLevelOne();
 paddle.initPaddle();
 
 //start button
-$(window).keypress(function(e) {
+$(window).keydown(function(e) {
     if (e.keyCode === 32) {
 		board.initBoard();
 		animateCanvas();
