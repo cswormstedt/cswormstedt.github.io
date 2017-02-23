@@ -1,18 +1,47 @@
 body  {
-	background-color: rgba(100, 100, 100, 0.7);
+	background-image: url(http://wallpapercave.com/wp/pEeUsp1.jpg);
 }
 
 header {
-	/*background-color: rgba(0, 0, 220, 0.7);*/
-	height: 150px;
+	display: inline-flex;
+	margin-top: 10px;
+	margin: auto;
+	height: 200px;
+	width: 100%;
+
 }
+
+.img {
+
+    width: 90px;
+    height: 90px;
+}
+
+/* resize images */
+.img img {
+    width: 100%;
+    height: auto;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  width: auto;
+}
+
+.title {
+	margin: auto;
+	height: auto;
+}
+
 
 #canvas {
 	font-family: 'Black Ops One', cursive;
 	display: block;
+	border: solid 1px rgba(255, 232, 0, 0.1);
 	margin-top: 10px;
 	margin: auto;
-	background-color: #777;
+	
 }
 
 

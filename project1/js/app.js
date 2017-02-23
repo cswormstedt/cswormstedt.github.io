@@ -48,9 +48,17 @@ var ball = {
 	drawBall: function(){	
 		ctx.beginPath(); 	      
 		ctx.arc(this.ballX, this.ballY, ballRadius, 0, 2 * Math.PI);
-		ctx.fillStyle = "#EE8108";
+		ctx.fillStyle = "rgb(255, 232, 0)";
 		ctx.fill();
 	},
+
+	//tried to make a second ball appear after certain 
+	// drawBallTwo: function(){	
+	// 	ctx.beginPath(); 	      
+	// 	ctx.arc(this.ballX, this.ballY, ballRadius, 0, 2 * Math.PI);
+	// 	ctx.fillStyle = "rgb(255, 232, 0)";
+	// 	ctx.fill();
+	// },
 	// collision logic
 	collision: function(){
 		//this hits the walls
@@ -86,10 +94,14 @@ var ball = {
 			this.ballDy = this.ballD[0].dy;
 			paddle.paddleX = paddle.paddleP[0].x;
 			paddle.paddleY = paddle.paddleP[0].y;
+			board.initLevelOne();
 			board.initBoard();
-			board.drawBrick();
-       		 
-    		}
+			board.drawBrick(); 
+    		} 
+    		//else {
+    		// 	alert("GAME OVER");
+    		// 	window.location.reload();
+    		// }
 		}
 	
 	 // brickCollison
@@ -176,9 +188,9 @@ drawBrick: function(){
 	    			this.board[c][r].y = this.brickY;
 					ctx.beginPath();
 					ctx.rect(this.brickX, this.brickY, this.width, this.height);
-					ctx.strokeStyle = "#f0ad4e";
+					ctx.strokeStyle = "rgb(255, 240, 0)";
 					ctx.lineWidth = 1;
-					ctx.fillStyle = "#EE8108";
+					ctx.fillStyle = "rgb(255, 232, 0)";
 					ctx.fill();
 					ctx.stroke();
 				}
@@ -191,7 +203,7 @@ var score = {
 	points: 0,
 	score: function(){
 		ctx.font = "13px 'Black Ops One', cursive"
-		ctx.fillStyle = "#EE8108";
+		ctx.fillStyle = "rgb(255, 232, 0)";
 		ctx.fillText("SCORE: " + this.points, 478, 10);
 
 	}
@@ -201,7 +213,7 @@ var lives = {
 	livesCount: 3,
 	lives: function(){
 		ctx.font = "12px 'Black Ops One', cursive"
-		ctx.fillStyle = "#EE8108";
+		ctx.fillStyle = "rgb(255, 232, 0)";
 		ctx.fillText("LIVES: " + this.livesCount, 10, 10);
 	}
 };
@@ -213,7 +225,7 @@ var player = {
 
 	player: function(){
 		ctx.font = "18px 'Black Ops One', cursive"
-		ctx.fillStyle = "#EE8108";
+		ctx.fillStyle = "rgb(255, 232, 0)";
 		ctx.fillText("PLAYER: " + this.playerInput, canvas.width/2 - 44, canvas.height -330);
 	}
 };
@@ -247,19 +259,19 @@ var paddle ={
 	drawPaddle: function(){
 		ctx.beginPath();
 		ctx.rect(this.paddleX, this.paddleY, paddleWidth, 5);
-		ctx.strokeStyle = "#f0ad4e";
+		ctx.strokeStyle = "rgb(255, 240, 0)";
 		ctx.lineWidth = 1;
-		ctx.fillStyle = "#EE8108";
+		ctx.fillStyle = "rgb(255, 232, 0)";
 		ctx.fill();
 		ctx.stroke();
 	},
 
 	control: function(){
 			if(this.keys[37] && this.paddleX > 0){
-				this.paddleX -= 5;
+				this.paddleX -= 6;
 			}
 			if(this.keys[39] && this.paddleX < canvas.width-paddleWidth){
-				this.paddleX += 5;
+				this.paddleX += 6;
 			}
 	},
 
