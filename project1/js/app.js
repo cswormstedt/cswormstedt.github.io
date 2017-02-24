@@ -52,7 +52,7 @@ var ball = {
 		ctx.fill();
 	},
 
-	//tried to make a second ball appear after certain 
+	//tried to make a second ball appear after certain point but it just replaced current ball
 	// drawBallTwo: function(){	
 	// 	ctx.beginPath(); 	      
 	// 	ctx.arc(this.ballX, this.ballY, ballRadius, 0, 2 * Math.PI);
@@ -83,8 +83,10 @@ var ball = {
 			this.ballDy = 3;
 			paddle.paddleX = paddle.paddleP[0].x;
         	paddle.paddleY = paddle.paddleP[0].y;
-        }if(lives.livesCount === 0){
-    		alert("GAME OVER");
+        }
+
+        if(lives.livesCount === 0 && player.playerInput === 1){
+    		alert("Step aside");
     		player.playerInput = 2;
     		lives.livesCount = 3;
     		score.points = 0;
@@ -97,12 +99,12 @@ var ball = {
 			board.initLevelOne();
 			board.initBoard();
 			board.drawBrick(); 
-    		} 
-    		//else {
-    		// 	alert("GAME OVER");
-    		// 	window.location.reload();
-    		// }
-		}
+    		}
+    		else if (lives.livesCount === 0 && player.playerInput === 2){
+  				alert("GAME OVER");
+    			window.location.reload();
+    	}
+    }
 	
 	 // brickCollison
 	 	for(c = 0; c < board.column; c++) {
@@ -135,7 +137,6 @@ var ball = {
 			}
 		}
 	},
-
 };
 
 // board 
