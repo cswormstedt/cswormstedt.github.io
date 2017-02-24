@@ -2,7 +2,8 @@
 
 Brick Breaker made with canvas, JavaScript and a bit of jquery.
 
-Just hit space and play. Move the paddle with left and right arrow keys.
+Hit space and play. Move the paddle with left and right arrow keys.
+Based on most retro games most players have little instructions and learn on the fly.
 
 The game starts with player one and player two takes over when player one reaches his or hers game over screen.
 
@@ -17,4 +18,6 @@ Future improvements:
 -I would like to improve the brick detection and the ball movement to be more random and fluid.
 -add swype.js
 -git rid of alerts and insert modals in their place
+-add more advance levels
+-laser sounds because lasers
 
