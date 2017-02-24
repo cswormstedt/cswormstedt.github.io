@@ -273,7 +273,8 @@ var paddle ={
 			}
 			if(this.keys[39] && this.paddleX < canvas.width-paddleWidth){
 				this.paddleX += 6;
-			}
+			}	
+			$.event.special.swipe.scrollSupressionThreshold
 	},
 
 };
@@ -290,6 +291,10 @@ $(window).one('keypress', function(e) {
 		board.initBoard();
 		animateCanvas();
 	}
+});
+
+$(window).on("swipe", function(event) {
+	$.event.special.swipe.scrollSupressionThreshold = true;
 });
 
 document.addEventListener('keydown', function(event){
