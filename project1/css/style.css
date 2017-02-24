@@ -1,5 +1,9 @@
 body  {
 	background-image: url(http://wallpapercave.com/wp/pEeUsp1.jpg);
+	font-family: 'Black Ops One', cursive;
+	color: rgb(255, 232, 0);
+
+
 }
 
 header {
@@ -44,5 +48,11 @@ img {
 	margin: auto;
 	
 }
+
+p {
+	position: absolute;
+	left: 46%;
+}
+
 
 

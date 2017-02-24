@@ -279,11 +279,21 @@ var paddle ={
 
 };
 
+// var startScreen = {
+
+// 	start: function(){
+// 		ctx.font = "18px 'Black Ops One', cursive"
+// 		ctx.fillStyle = "rgb(255, 232, 0)";
+// 		ctx.fillText("SPACE to START");
+	
+// 	};
+
 //start
 window.onload = function(event){
 ball.initBall();
 board.initLevelOne();
 paddle.initPaddle();
+// startScreen.start();
 
 //start button
 $(window).one('keypress', function(e) {
