@@ -1,6 +1,6 @@
 # cswormstedt.io
 
-Brick Breaker made with canvas and JavaScript.
+Brick Breaker made with canvas, JavaScript and a bit of jquery.
 
 Just hit space and play. Move the paddle with left and right arrow keys.
 
