@@ -274,7 +274,7 @@ var paddle ={
 			if(this.keys[39] && this.paddleX < canvas.width-paddleWidth){
 				this.paddleX += 6;
 			}	
-			$.event.special.swipe.scrollSupressionThreshold
+			// $.event.special.swipe.scrollSupressionThreshold
 	},
 
 };
@@ -293,9 +293,9 @@ $(window).one('keypress', function(e) {
 	}
 });
 
-$(window).on("swipe", function(event) {
-	$.event.special.swipe.scrollSupressionThreshold = true;
-});
+// $(window).on("swipe", function(event) {
+// 	$.event.special.swipe.scrollSupressionThreshold = true;
+// });
 
 document.addEventListener('keydown', function(event){
 	paddle.keys[event.keyCode] = true;
