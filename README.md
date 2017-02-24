@@ -20,4 +20,5 @@ Future improvements:
 -git rid of alerts and insert modals in their place
 -add more advance levels
 -laser sounds because lasers
+-add a second ball function at a certain point in the game based on points 
 
