@@ -52,13 +52,6 @@ var ball = {
 		ctx.fill();
 	},
 
-	//tried to make a second ball appear after certain point but it just replaced current ball
-	// drawBallTwo: function(){	
-	// 	ctx.beginPath(); 	      
-	// 	ctx.arc(this.ballX, this.ballY, ballRadius, 0, 2 * Math.PI);
-	// 	ctx.fillStyle = "rgb(255, 232, 0)";
-	// 	ctx.fill();
-	// },
 	// collision logic
 	collision: function(){
 		//this hits the walls
@@ -129,6 +122,11 @@ var ball = {
 						board.initBoard();
 						board.drawBrick();
 					}
+					if (score.points === 30){
+						console.log(ballTwo.drawBallTwo())
+						ballTwo.drawBallTwo();
+
+					}
 					if (score.points === 54){
 						alert("PLAYER: " + this.playerInput + " WON!");
 						}
@@ -138,6 +136,54 @@ var ball = {
 		}
 	},
 };
+//ball two isnt popping up
+// var ballTwo ={
+// //starting position
+// 	ballP2: [],
+// 	//starting direction
+// 	ballD2: [],
+// 	//updates ball postion and direction
+// 	ballX2:  '',
+// 	ballY2:  '',
+// 	ballDx2: '',
+// 	ballDy2: '',
+// 	//position varibles
+// 	startPoint: function(x, y){
+// 		return{
+// 			x: x,
+// 			y: y
+// 		}
+// 	},
+// 	//direction varibales
+// 	direction: function(dx, dy){
+// 		return{
+// 			dx: dx,
+// 			dy: dy
+// 		}
+// 	},
+// 	//ball movement
+// 	move: function(){
+// 		this.ballX2 += this.ballDx2;
+// 	    this.ballY2 += this.ballDy2;
+// 	},
+// 	// sets position and direction varibles
+// 	initBall: function(){
+//         this.ballP2.push(this.startPoint(canvas.width/2, canvas.height -35));
+//     	this.ballD2.push(this.direction(3, -3));
+//     	this.ballX2  = this.ballP2[0].x;
+//     	this.ballY2  = this.ballP2[0].y;
+//     	this.ballDx2 = this.ballD2[0].dx;
+//     	this.ballDy2 = this.ballD2[0].dy;
+//     },
+// 	// ball is made
+// 	drawBallTwo: function(){	
+// 		ctx.beginPath(); 	      
+// 		ctx.arc(this.ballX2, this.ballY2, ballRadius, 0, 2 * Math.PI);
+// 		ctx.fillStyle = "rgb(255, 232, 0)";
+// 		ctx.fill();
+// 	},
+
+// };
 
 // board 
 var board = {
@@ -279,15 +325,6 @@ var paddle ={
 
 };
 
-// var startScreen = {
-
-// 	start: function(){
-// 		ctx.font = "18px 'Black Ops One', cursive"
-// 		ctx.fillStyle = "rgb(255, 232, 0)";
-// 		ctx.fillText("SPACE to START");
-	
-// 	};
-
 //start
 window.onload = function(event){
 ball.initBall();
@@ -322,6 +359,7 @@ function draw() {
 
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     ball.drawBall();
+    // ballTwo.drawBallTwo();
     paddle.drawPaddle();
     board.drawBrick();
     ball.collision();
