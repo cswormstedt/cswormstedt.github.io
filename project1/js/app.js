@@ -79,9 +79,10 @@ var ball = {
         }
 
         if(lives.livesCount === 0 && player.playerInput === 1){
-    		alert("Step aside");
+        	$('.popUpBox-hidden2').toggleClass('popUpBox');
+        	$('#next').onClick(('popUpBox').toggleClass('.popUpBox-hidden2'));
     		player.playerInput = 2;
-    		lives.livesCount = 3;
+    		lives.livesCount = 1;
     		score.points = 0;
     		this.ballX  = this.ballP[0].x;
 			this.ballY  = this.ballP[0].y;
@@ -93,9 +94,13 @@ var ball = {
 			board.initBoard();
 			board.drawBrick(); 
     		}
-    		else if (lives.livesCount === 0 && player.playerInput === 2){
-  				alert("GAME OVER");
-    			window.location.reload();
+    		else if(lives.livesCount === 0 && player.playerInput === 2){
+    			console.log('game over', lives.livesCount, player.playerInput)
+    			$('.popUpBox-hidden').toggleClass('popUpBox');
+  				$('.new').click(function(){
+				window.location.reload();
+				});
+    			// window.location.reload();
     	}
     }
 	
@@ -128,7 +133,10 @@ var ball = {
 
 					}
 					if (score.points === 54){
-						alert("PLAYER: " + this.playerInput + " WON!");
+						$('.popUpBox-hidden3').toggleClass('popUpBox');
+						$('.new').click(function(){
+							window.location.reload();
+							})
 						}
                 	}
 				}
@@ -269,7 +277,6 @@ var lives = {
 var player = {
 	playerInput: 1,
 
-
 	player: function(){
 		ctx.font = "18px 'Black Ops One', cursive"
 		ctx.fillStyle = "rgb(255, 232, 0)";
@@ -320,17 +327,35 @@ var paddle ={
 			if(this.keys[39] && this.paddleX < canvas.width-paddleWidth){
 				this.paddleX += 6;
 			}	
-			// $.event.special.swipe.scrollSupressionThreshold
 	},
 
 };
+
+// var hammertime = new Hammer(myElement, myOptions);
+// hammertime.on('pan', function(ev) {
+// 	console.log(ev);
+// });
+
 
 //start
 window.onload = function(event){
 ball.initBall();
 board.initLevelOne();
 paddle.initPaddle();
-// startScreen.start();
+console.log('hey')
+  var body = document.getElementsByTagName("body")[0]
+  var hammertime = new Hammer(body);
+  hammertime.get("swipe").set({ direction: Hammer.DIRECTION_ALL });
+  hammertime.on("swipe", function(eventObject) {
+  	console.log('1')
+      if(eventObject.direction === 2) {
+          console.log("left")
+          console.log('2')
+      } else if(eventObject.direction === 4) {
+        console.log("right");
+      }
+      console.log(eventObject.velocityX)
+  });
 
 //start button
 $(window).one('keypress', function(e) {
@@ -341,9 +366,7 @@ $(window).one('keypress', function(e) {
 	}
 });
 
-// $(window).on("swipe", function(event) {
-// 	$.event.special.swipe.scrollSupressionThreshold = true;
-// });
+
 
 document.addEventListener('keydown', function(event){
 	paddle.keys[event.keyCode] = true;

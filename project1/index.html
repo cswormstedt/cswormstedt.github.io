@@ -2,31 +2,32 @@
 <html>
 <head>
 <!-- mobile first -->
-	<meta name="viewport" content="width=device-width, initial-scale=1"/>
+	<meta name="viewport" content="user-scalable=no, width=device-width, initial-scale=1, maximum-scale=1">
+
 <!-- Bootstrap style -->	
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous"/>
-<!-- my style -->
-	<link rel="stylesheet" type="text/css" href="css/style.css"/>
-	<!-- fonts -->
-	<link href="https://fonts.googleapis.com/css?family=Black+Ops+One" rel="stylesheet"/>
-
 
 <!-- jquery -->
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 
 <!-- Bootstrap js -->
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+<!-- hammer js -->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/hammer.js/2.0.8/hammer.js"></script>
+
+<!-- fonts -->
+	<link href="https://fonts.googleapis.com/css?family=Black+Ops+One" rel="stylesheet"/>	
+
+<!-- my style -->
+	<link rel="stylesheet" type="text/css" href="css/style.css"/>
 	<title> Brick Breaker</title>
 </head>
 <body>
-	<!-- <div class="gameOverModal">
-		<div class="open closed">
-	        <div id="button-modal">
-	        	<h2>GAME OVER</h2>
-	         	<button>New Game</button>
-	        </div>
-	     </div>
-	</div> -->
+	
+		
+
+
 
 	<div class="container-fluid">
 		<div class="row">
@@ -49,9 +50,25 @@
 		</div>
 	</div>
 
-
-
-
+<!-- modals//need to make the button clicks remove modal -->
+	<div class="popUpBox-hidden2">
+        <div>
+        	<h2>Step Aside</h2>
+         	<button id="next">next player</button>
+        </div>
+     </div>
+     <div class="popUpBox-hidden3">
+        <div>
+        	<h2>Winner</h2>
+         	<button class="new">New Game</button>
+        </div>
+     </div>
+	<div class="popUpBox-hidden">
+        <div>
+        	<h2>GAME OVER</h2>
+         	<button class="new">New Game</button>
+        </div>
+     </div>
 
 <script src="js/app.js"></script>
 </body>
